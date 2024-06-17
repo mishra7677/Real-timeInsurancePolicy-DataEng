@@ -47,7 +47,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT MAX(creation_timestamp) as maxDate From dbo.agent",
+						"sqlReaderQuery": "SELECT MAX(create_timestamp) as maxDate From dbo.agent",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
