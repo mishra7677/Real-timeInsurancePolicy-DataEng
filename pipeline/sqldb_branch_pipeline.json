@@ -48,7 +48,14 @@
 				"outputs": [
 					{
 						"referenceName": "Parquet",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filePath": {
+								"value": "@concat('branch','_',utcNow())",
+								"type": "Expression"
+							},
+							"dir": "branch"
+						}
 					}
 				]
 			}
