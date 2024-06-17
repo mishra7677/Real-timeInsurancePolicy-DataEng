@@ -1,0 +1,23 @@
+{
+	"name": "Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_branch_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('branch','_',utcnow())",
+					"type": "Expression"
+				},
+				"folderPath": "landing/branch"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
