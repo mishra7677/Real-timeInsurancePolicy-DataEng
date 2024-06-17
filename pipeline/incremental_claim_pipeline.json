@@ -51,7 +51,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select MAX(LastUpdatedTimeStamp) as maxDate from Claim",
+						"sqlReaderQuery": "select MAX(LastUpdatedTimeStamp) as maxDate from dbo.Claim",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
