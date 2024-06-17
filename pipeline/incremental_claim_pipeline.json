@@ -91,7 +91,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from claim\nwhere LastUpdatedTimeStamp > '@{activity('Get Date From Claim_hw').output}'' and\nLastUpdatedTimeStamp <= '@{activity('get LastUpdate from claim table').output.firstRow.maxDate}'",
+							"value": "select * from claim\nwhere LastUpdatedTimeStamp > '@{activity('Get Date From Claim_hw').output}' and\nLastUpdatedTimeStamp <= '@{activity('get LastUpdate from claim table').output.firstRow.maxDate}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
