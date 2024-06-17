@@ -86,7 +86,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.agent \nwhere \ncreation_timestamp >'@{activity('Get Date From HW').output.firstRow.Prop_0}' and \ncreation_timestamp <= '@{activity('get LastUpdate From Agent Table').output.firstRow.maxDate}'",
+							"value": "select * from dbo.agent \nwhere \ncreate_timestamp >'@{activity('Get Date From HW').output.firstRow.Prop_0}' and \ncreate_timestamp <= '@{activity('get LastUpdate From Agent Table').output.firstRow.maxDate}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
