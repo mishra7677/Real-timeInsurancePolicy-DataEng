@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "https://vaultArc.vault.azure.net/"
+			"baseUrl": "https://akv-project3-vinsurance.vault.azure.net/"
 		}
 	}
 }
