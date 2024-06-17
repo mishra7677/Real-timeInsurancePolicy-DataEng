@@ -72,7 +72,7 @@
 						]
 					},
 					{
-						"activity": "get LastUpdate from claim table ",
+						"activity": "get LastUpdate from claim table",
 						"dependencyConditions": [
 							"Succeeded"
 						]
