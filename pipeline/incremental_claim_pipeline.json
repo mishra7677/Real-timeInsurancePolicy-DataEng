@@ -91,7 +91,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from claim\nwhere LastUpdatedTimeStamp > '@{activity('Get Date From Claim_hw').output}' and\nLastUpdatedTimeStamp <= '@{activity('get LastUpdate from claim table').output.firstRow.maxDate}'",
+							"value": "SELECT *\nFROM claim\nwhere \nLastUpdatedTimeStamp > '@{activity('Get Date From Claim_hw').output.firstRow.Prop_0}'\nAND\nLastUpdatedTimeStamp <= '@{activity('get LastUpdate from claim table').output.firstRow.maxDate}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -127,11 +127,76 @@
 						"referenceName": "Parquet",
 						"type": "DatasetReference",
 						"parameters": {
-							"filePath": {
-								"value": "@concat('claim','_', utcnow())",
-								"type": "Expression"
-							},
+							"filePath": "@concat('claim','_',utcnow())",
 							"dir": "Claim"
+						}
+					}
+				]
+			},
+			{
+				"name": "update Claim HW  file",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "sqlDb claim to adls",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "select '@{activity('get LastUpdate from claim table').output.firstRow.maxDate}'",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SqlServerTable1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference",
+						"parameters": {
+							"dir": "Claim",
+							"fileName": "claim_hw.txt"
 						}
 					}
 				]
